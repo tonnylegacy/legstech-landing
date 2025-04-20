@@ -1,198 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEGsTECH - Legacy Technology</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEGSTECH | Affordable Phones & Opportunities</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
       color: #333;
     }
     header {
-      background: #000;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-    header img {
-      max-width: 150px;
-    }
-    .cart-icon {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .cart-count {
-      background: red;
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      margin-left: 5px;
-    }
-    .section {
-      padding: 40px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-    .hero {
       background: #222;
       color: white;
-      padding: 60px 20px;
-      text-align: center;
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .hero h1 {
-      font-size: 2.5em;
+    header img {
+      height: 40px;
     }
-    .btn {
-      background: #ff6b00;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      margin: 10px;
-      font-size: 1em;
+    header .cart {
       cursor: pointer;
-      border-radius: 5px;
+      font-size: 1.2em;
     }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    .hero {
+      padding: 2em;
+      background: #0077cc;
+      color: white;
       text-align: center;
     }
-    .card img {
-      max-width: 100%;
+    .section {
+      padding: 2em;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5em;
+    }
+    .product {
+      background: white;
+      padding: 1em;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
       height: 180px;
       object-fit: cover;
-    }
-    .cart-btn {
-      background: #28a745;
-      margin-top: 10px;
-    }
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    .jobs {
-      background: #fff;
-      border-left: 5px solid #007bff;
-      margin-bottom: 20px;
-      padding: 15px;
-      border-radius: 5px;
-    }
-    #cart {
-      display: none;
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      background: white;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      z-index: 1000;
-      width: 300px;
       border-radius: 8px;
+    }
+    .product h3 {
+      margin: 0.5em 0;
+    }
+    .btn {
+      background: #0077cc;
+      color: white;
+      border: none;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 0.5em;
+    }
+    .cart-items {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1em;
+      display: none;
+      width: 250px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .job-section, .links {
+      background: #fff;
+      padding: 2em;
+      margin-top: 1em;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
   </style>
 </head>
+
 <body>
   <header>
-    <img src="https://i.ibb.co/tMx61w6T/tonylogo.png" alt="LEGsTECH Logo">
-    <div class="cart-icon" onclick="toggleCart()">
-      Cart <span class="cart-count" id="cart-count">0</span>
+    <img src="https://i.ibb.co/tMx61w6T/tonylogo.png" alt="LEGSTECH Logo" />
+    <div class="cart" onclick="toggleCart()">
+      <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
     </div>
   </header>
 
-  <section class="hero">
-    <h1>Smart Tech. Real Deals. Legacy-Made.</h1>
-    <p>Shop phones, explore Forex, and find job opportunities all in one place.</p>
-    <a href="https://shorturl.at/W2vgz"><button class="btn">Join Amega</button></a>
-    <a href="https://t.me/ysdbcommunity"><button class="btn">Join Our Telegram</button></a>
-  </section>
-
-  <section class="section">
-    <h2>Shop Phones</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="https://i.ibb.co/WtdRbN0/phone1.jpg" alt="Phone 1">
-        <h3>Infinix Hot 30</h3>
-        <p>GH₵ 950</p>
-        <button class="btn cart-btn" onclick="addToCart('Infinix Hot 30', 950)">Add to Cart</button>
-      </div>
-      <div class="card">
-        <img src="https://i.ibb.co/fpV9KkX/phone2.jpg" alt="Phone 2">
-        <h3>iPhone 11 Pro Max</h3>
-        <p>GH₵ 3,500</p>
-        <button class="btn cart-btn" onclick="addToCart('iPhone 11 Pro Max', 3500)">Add to Cart</button>
-      </div>
-      <div class="card">
-        <img src="https://i.ibb.co/pL9pkyr/phone3.jpg" alt="Phone 3">
-        <h3>Samsung A52s</h3>
-        <p>GH₵ 2,400</p>
-        <button class="btn cart-btn" onclick="addToCart('Samsung A52s', 2400)">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Job Opportunities</h2>
-    <div class="jobs">
-      <h3>Social Media Assistant (Remote)</h3>
-      <p>Work with a growing team to manage and grow social platforms.</p>
-      <small>Apply: careers@legstech.com</small>
-    </div>
-    <div class="jobs">
-      <h3>Junior Web Developer - Accra</h3>
-      <p>Assist in building web tools and affiliate dashboards.</p>
-      <small>Apply: hr@legstech.com</small>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 LEGsTECH. All rights reserved.</p>
-    <p><a href="https://t.me/ysdbcommunity" style="color: #ff6b00">Join our Telegram Community</a></p>
-  </footer>
-
-  <div id="cart">
-    <h3>Cart Items</h3>
-    <ul id="cart-items"></ul>
+  <div class="hero">
+    <h1>Welcome to LEGSTECH</h1>
+    <p>Affordable phones, trusted affiliate deals & more.</p>
   </div>
+
+  <div class="section">
+    <h2>Top Phones</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://i.ibb.co/Tq9NHrk/samsung.jpg" alt="Samsung Galaxy A14">
+        <h3>Samsung Galaxy A14</h3>
+        <p>GHS 1,300</p>
+        <button class="btn" onclick="addToCart('Samsung Galaxy A14 - GHS 1,300')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://i.ibb.co/Hq4bfhx/redmi.jpg" alt="Redmi Note 12">
+        <h3>Redmi Note 12</h3>
+        <p>GHS 1,000</p>
+        <button class="btn" onclick="addToCart('Redmi Note 12 - GHS 1,000')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://i.ibb.co/72WzszZ/itel.jpg" alt="Itel P40">
+        <h3>Itel P40</h3>
+        <p>GHS 650</p>
+        <button class="btn" onclick="addToCart('Itel P40 - GHS 650')">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="links section">
+    <h2>Join Us</h2>
+    <p><a href="https://shorturl.at/W2vgz" class="btn">Join Amega</a></p>
+    <p><a href="https://t.me/ysdbcommunity" class="btn">Join Our Telegram</a></p>
+  </div>
+
+  <div class="job-section section">
+    <h2>Job Opportunities</h2>
+    <p>Stay tuned for updates on new job openings right here!</p>
+  </div>
+
+  <div id="cart-items" class="cart-items"></div>
 
   <script>
     let cart = [];
-
-    function addToCart(product, price) {
-      cart.push({ product, price });
-      updateCart();
-    }
-
-    function updateCart() {
-      document.getElementById('cart-count').textContent = cart.length;
-      let list = document.getElementById('cart-items');
-      list.innerHTML = '';
-      cart.forEach(item => {
-        let li = document.createElement('li');
-        li.textContent = `${item.product} - GH₵${item.price}`;
-        list.appendChild(li);
-      });
+    function addToCart(item) {
+      cart.push(item);
+      document.getElementById('cart-count').innerText = cart.length;
+      updateCartItems();
     }
 
     function toggleCart() {
-      let cartBox = document.getElementById('cart');
-      cartBox.style.display = cartBox.style.display === 'block' ? 'none' : 'block';
+      const el = document.getElementById('cart-items');
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function updateCartItems() {
+      const el = document.getElementById('cart-items');
+      el.innerHTML = '<h4>Cart Items:</h4><ul>' + cart.map(i => `<li>${i}</li>`).join('') + '</ul>';
     }
   </script>
 </body>
+
 </html>
