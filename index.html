@@ -1,162 +1,723 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LEGSTECH | Affordable Phones & Opportunities</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #222;
-      color: white;
-      padding: 1em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header img {
-      height: 40px;
-    }
-    header .cart {
-      cursor: pointer;
-      font-size: 1.2em;
-    }
-    .hero {
-      padding: 2em;
-      background: #0077cc;
-      color: white;
-      text-align: center;
-    }
-    .section {
-      padding: 2em;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5em;
-    }
-    .product {
-      background: white;
-      padding: 1em;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .product img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .product h3 {
-      margin: 0.5em 0;
-    }
-    .btn {
-      background: #0077cc;
-      color: white;
-      border: none;
-      padding: 0.5em 1em;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 0.5em;
-    }
-    .cart-items {
-      position: fixed;
-      top: 60px;
-      right: 10px;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 1em;
-      display: none;
-      width: 250px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      z-index: 1000;
-    }
-    .job-section, .links {
-      background: #fff;
-      padding: 2em;
-      margin-top: 1em;
-      border-radius: 10px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LEGSTECH | Your Marketplace for Phones & More</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        :root {
+            --primary-color: #0077cc; /* Your existing blue */
+            --secondary-color: #222; /* Your existing dark header */
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white-bg: #fff;
+            --border-color: #ddd;
+            --shadow-light: 0 2px 6px rgba(0,0,0,0.1);
+            --shadow-medium: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.7em 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #005a99; /* Darker shade of primary */
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8em 1em;
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            justify-content: space-between;
+            align-items: center;
+            gap: 1em; /* Space between flex items */
+        }
+        header .logo img {
+            height: 45px; /* Slightly larger logo */
+        }
+        header .search-bar {
+            flex-grow: 1; /* Allows search bar to take available space */
+            max-width: 600px;
+            display: flex;
+        }
+        header .search-bar input {
+            flex-grow: 1;
+            padding: 0.6em 1em;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1em;
+        }
+        header .search-bar button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6em 1em;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        header .nav-icons {
+            display: flex;
+            gap: 1.5em; /* Space between icons */
+            font-size: 1.1em;
+        }
+        header .nav-icons > div {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+        }
+        header .nav-icons .cart-count {
+            background: red;
+            color: white;
+            font-size: 0.7em;
+            padding: 0.2em 0.5em;
+            border-radius: 50%;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 3em 1em;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 0.5em;
+        }
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 1.5em;
+        }
+
+        /* General Section Styling */
+        .section {
+            padding: 2.5em 1em;
+            background: var(--white-bg);
+            margin-top: 1.5em;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+        }
+        .section h2 {
+            text-align: center;
+            margin-bottom: 1.5em;
+            font-size: 2em;
+            color: var(--secondary-color);
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8em;
+            justify-content: center; /* Center items if they don't fill the grid */
+        }
+        .product-card {
+            background: var(--white-bg);
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        .product-card img {
+            width: 100%;
+            height: 180px; /* Fixed height for consistency */
+            object-fit: contain; /* Use 'contain' to show full image without cropping */
+            border-radius: 8px;
+            margin-bottom: 0.8em;
+        }
+        .product-card h3 {
+            margin: 0.5em 0 0.2em;
+            font-size: 1.3em;
+            color: var(--primary-color);
+        }
+        .product-card p {
+            margin-bottom: 1em;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .product-card .btn {
+            width: calc(100% - 1em); /* Adjust button width */
+            margin-top: auto; /* Push button to the bottom */
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px; /* Hidden by default */
+            width: 300px;
+            height: 100%;
+            background: var(--white-bg);
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: right 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+        }
+        .cart-sidebar.open {
+            right: 0; /* Slide in */
+        }
+        .cart-sidebar h4 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8em;
+            margin-bottom: 1em;
+            color: var(--secondary-color);
+        }
+        .cart-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1; /* Allow cart items to scroll if many */
+            overflow-y: auto;
+        }
+        .cart-sidebar ul li {
+            padding: 0.5em 0;
+            border-bottom: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-sidebar ul li:last-child {
+            border-bottom: none;
+        }
+        .cart-sidebar .remove-item-btn {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        .cart-total {
+            padding: 1em 0;
+            border-top: 1px solid var(--border-color);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1em;
+        }
+        .cart-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8em;
+            padding-top: 1em;
+        }
+        .cart-actions .btn {
+            width: 100%;
+            text-align: center;
+        }
+        .close-cart-btn {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            align-self: flex-end;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        .close-cart-btn:hover {
+            color: var(--primary-color);
+        }
+
+        /* Product Upload Form */
+        .upload-form {
+            background: var(--white-bg);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 1.2em;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6em;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group textarea,
+        .form-group select {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .form-group textarea {
+            resize: vertical; /* Allow vertical resizing */
+        }
+        .form-group input[type="file"] {
+            padding: 8px 0;
+        }
+        .upload-form .btn {
+            width: 100%;
+            padding: 1em;
+            font-size: 1.1em;
+        }
+        #upload-status {
+            margin-top: 1.5em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Affiliate/Job Links Section (Updated) */
+        .affiliate-job-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5em;
+            margin-top: 1.5em;
+        }
+        .affiliate-card, .job-card {
+            background: var(--white-bg);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+        }
+        .affiliate-card h3, .job-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1em;
+        }
+        .affiliate-card p, .job-card p {
+            margin-bottom: 1.5em;
+        }
+        .affiliate-card .btn, .job-card .btn {
+            width: auto;
+            min-width: 150px;
+            padding: 0.8em 1.5em;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 2em 1em;
+            text-align: center;
+            margin-top: 2em;
+        }
+        footer .footer-links a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        footer .social-icons {
+            margin-top: 1em;
+        }
+        footer .social-icons a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 0.5em;
+            transition: color 0.3s ease;
+        }
+        footer .social-icons a:hover {
+            color: var(--primary-color);
+        }
+        footer p {
+            margin-top: 1.5em;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            header .search-bar {
+                width: 100%;
+                margin-top: 1em;
+            }
+            header .nav-icons {
+                margin-top: 1em;
+                justify-content: space-around;
+                width: 100%;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .section {
+                padding: 1.5em 0.8em;
+                margin-top: 1em;
+            }
+            .section h2 {
+                font-size: 1.8em;
+            }
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 1em;
+            }
+            .product-card img {
+                height: 150px;
+            }
+            .product-card h3 {
+                font-size: 1.1em;
+            }
+            .product-card p {
+                font-size: 0.9em;
+            }
+            .upload-form {
+                padding: 1.5em;
+            }
+            .form-group input, .form-group textarea {
+                width: calc(100% - 20px);
+                padding: 10px;
+            }
+            .affiliate-job-section {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+            .cart-sidebar {
+                width: 100%; /* Full width on small screens */
+                right: -100%;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <header>
-    <img src="https://i.ibb.co/tMx61w6T/tonylogo.png" alt="LEGSTECH Logo" />
-    <div class="cart" onclick="toggleCart()">
-      <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
+    <header>
+        <a href="#" class="logo">
+            <img src="https://i.ibb.co/tMx61w6T/tonylogo.png" alt="LEGSTECH Logo" />
+        </a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for products..." />
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <nav class="nav-icons">
+            <div class="user-account">
+                <i class="fas fa-user"></i> Account
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i> Cart <span id="cart-count" class="cart-count">0</span>
+            </div>
+            </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Welcome to LEGSTECH Marketplace</h1>
+            <p>Your one-stop shop for affordable phones, trusted affiliate deals, and selling your own products!</p>
+            <a href="#sell-section" class="btn">Start Selling Today!</a>
+            <a href="#products-section" class="btn btn-secondary">Shop Now</a>
+        </div>
     </div>
-  </header>
 
-  <div class="hero">
-    <h1>Welcome to LEGSTECH</h1>
-    <p>Affordable phones, trusted affiliate deals & more.</p>
-  </div>
+    <main class="container">
+        <section id="products-section" class="section">
+            <h2>Featured Phones & Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://i.ibb.co/SLW6ddn/samGA14.jpg" alt="Samsung Galaxy A14">
+                    <h3>Samsung Galaxy A14</h3>
+                    <p>GHS 1,300</p>
+                    <button class="btn" onclick="addToCart('Samsung Galaxy A14', 1300)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://i.ibb.co/v40R79N0/1200.webp" alt="Redmi Note 12">
+                    <h3>Redmi Note 12</h3>
+                    <p>GHS 1,000</p>
+                    <button class="btn" onclick="addToCart('Redmi Note 12', 1000)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://i.ibb.co/72WzszZ/itel.jpg" alt="Itel P40">
+                    <h3>Itel P40</h3>
+                    <p>GHS 650</p>
+                    <button class="btn" onclick="addToCart('Itel P40', 650)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://i.ibb.co/XzY0Z7h/iphone13.jpg" alt="iPhone 13">
+                    <h3>iPhone 13</h3>
+                    <p>GHS 5,500</p>
+                    <button class="btn" onclick="addToCart('iPhone 13', 5500)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://i.ibb.co/h7gJj4n/samsungS23.jpg" alt="Samsung Galaxy S23">
+                    <h3>Samsung Galaxy S23</h3>
+                    <p>GHS 7,800</p>
+                    <button class="btn" onclick="addToCart('Samsung Galaxy S23', 7800)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://i.ibb.co/k2D7W3k/tecnoSpark10.jpg" alt="Tecno Spark 10">
+                    <h3>Tecno Spark 10</h3>
+                    <p>GHS 900</p>
+                    <button class="btn" onclick="addToCart('Tecno Spark 10', 900)">Add to Cart</button>
+                </div>
+                </div>
+        </section>
 
-  <div class="section">
-    <h2>Top Phones</h2>
-    <div class="products">
-      <div class="product">
-        <img src="https://i.ibb.co/SLW6ddn/samGA14.jpg" alt="samsung Galaxy A14 border="0">
-        <h3>Samsung Galaxy A14</h3>
-        <p>GHS 1,300</p>
-        <button class="btn" onclick="addToCart('Samsung Galaxy A14 - GHS 1,300')">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://i.ibb.co/v40R79N0/1200.webp" alt="1200" border="0"></a>
-        <h3>Redmi Note 12</h3>
-        <p>GHS 1,000</p>
-        <button class="btn" onclick="addToCart('Redmi Note 12 - GHS 1,000')">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://i.ibb.co/72WzszZ/itel.jpg" alt="Itel P40">
-        <h3>Itel P40</h3>
-        <p>GHS 650</p>
-        <button class="btn" onclick="addToCart('Itel P40 - GHS 650')">Add to Cart</button>
-      </div>
+        <section id="sell-section" class="section">
+            <h2>Sell Your Product on LEGSTECH</h2>
+            <div class="upload-form">
+                <form id="productUploadForm">
+                    <div class="form-group">
+                        <label for="seller-name">Your Name/Company:</label>
+                        <input type="text" id="seller-name" name="sellerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="seller-contact">Contact Email/Phone:</label>
+                        <input type="text" id="seller-contact" name="sellerContact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-name">Product Name:</label>
+                        <input type="text" id="product-name" name="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Category:</label>
+                        <select id="product-category" name="productCategory" required>
+                            <option value="">Select a Category</option>
+                            <option value="phones">Phones</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description">Description:</label>
+                        <textarea id="product-description" name="productDescription" rows="6"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Price (GHS):</label>
+                        <input type="number" id="product-price" name="productPrice" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image">Product Image:</label>
+                        <input type="file" id="product-image" name="productImage" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn">List Product</button>
+                </form>
+                <p id="upload-status"></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Opportunities with LEGSTECH</h2>
+            <div class="affiliate-job-section">
+                <div class="affiliate-card">
+                    <h3>Join Our Affiliate Program</h3>
+                    <p>Become a LEGSTECH affiliate and earn by promoting our trusted deals. Start earning today!</p>
+                    <a href="https://shorturl.at/W2vgz" class="btn" target="_blank">Join Amega</a>
+                </div>
+                <div class="job-card">
+                    <h3>Career Opportunities</h3>
+                    <p>Looking for a challenging career in tech? Stay tuned for new job openings at LEGSTECH!</p>
+                    <p>Join our community for updates:</p>
+                    <a href="https://t.me/ysdbcommunity" class="btn" target="_blank">Join Our Telegram</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <button class="close-cart-btn" onclick="toggleCart()">&times;</button>
+        <h4>Your Shopping Cart</h4>
+        <ul id="cart-items-list">
+            <li>No items in cart yet.</li>
+        </ul>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total-price">GHS 0.00</span>
+        </div>
+        <div class="cart-actions">
+            <button class="btn">Proceed to Checkout</button>
+            <button class="btn btn-secondary">Clear Cart</button>
+        </div>
     </div>
-  </div>
 
-  <div class="links section">
-    <h2>Join Us</h2>
-    <p><a href="https://shorturl.at/W2vgz" class="btn">Join Amega</a></p>
-    <p><a href="https://t.me/ysdbcommunity" class="btn">Join Our Telegram</a></p>
-  </div>
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> LEGSTECH Marketplace. All rights reserved.</p>
+        </div>
+    </footer>
 
-  <div class="job-section section">
-    <h2>Job Opportunities</h2>
-    <p>Stay tuned for updates on new job openings right here!</p>
-  </div>
+    <script>
+        let cart = []; // Stores objects { name: "Product Name", price: 1234, quantity: 1 }
 
-  <div id="cart-items" class="cart-items"></div>
+        function addToCart(itemName, itemPrice) {
+            const existingItemIndex = cart.findIndex(item => item.name === itemName);
 
-  <script>
-    let cart = [];
-    function addToCart(item) {
-      cart.push(item);
-      document.getElementById('cart-count').innerText = cart.length;
-      updateCartItems();
-    }
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+            }
+            updateCartUI();
+            // Optional: Slide out cart sidebar
+            document.getElementById('cart-sidebar').classList.add('open');
+        }
 
-    function toggleCart() {
-      const el = document.getElementById('cart-items');
-      el.style.display = el.style.display === 'block' ? 'none' : 'block';
-    }
+        function removeFromCart(itemName) {
+            cart = cart.filter(item => item.name !== itemName);
+            updateCartUI();
+        }
 
-    function updateCartItems() {
-      const el = document.getElementById('cart-items');
-      el.innerHTML = '<h4>Cart Items:</h4><ul>' + cart.map(i => `<li>${i}</li>`).join('') + '</ul>';
-    }
-  </script>
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCountElement = document.getElementById('cart-count');
+            const cartItemsListElement = document.getElementById('cart-items-list');
+            const cartTotalPriceElement = document.getElementById('cart-total-price');
+
+            let totalItems = 0;
+            let totalPrice = 0;
+            cartItemsListElement.innerHTML = ''; // Clear current items
+
+            if (cart.length === 0) {
+                cartItemsListElement.innerHTML = '<li>No items in cart yet.</li>';
+                cartCountElement.innerText = '0';
+                cartTotalPriceElement.innerText = 'GHS 0.00';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>GHS ${(item.price * item.quantity).toFixed(2)}</span>
+                        <button class="remove-item-btn" onclick="removeFromCart('${item.name}')">&times;</button>
+                    `;
+                    cartItemsListElement.appendChild(listItem);
+                    totalItems += item.quantity;
+                    totalPrice += (item.price * item.quantity);
+                });
+                cartCountElement.innerText = totalItems;
+                cartTotalPriceElement.innerText = `GHS ${totalPrice.toFixed(2)}`;
+            }
+        }
+
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cart-sidebar');
+            cartSidebar.classList.toggle('open');
+        }
+
+        // Handle Product Upload Form Submission (Client-side simulation)
+        document.getElementById('productUploadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const productName = document.getElementById('product-name').value;
+            const productPrice = document.getElementById('product-price').value;
+            const uploadStatus = document.getElementById('upload-status');
+
+            uploadStatus.style.color = 'orange';
+            uploadStatus.innerText = 'Processing your product listing...';
+
+            // --- IMPORTANT: This is where you would send data to your backend ---
+            // In a real Jumia-like site, this form data (including the image file)
+            // would be sent to a server using `fetch` or `XMLHttpRequest`.
+            // The server would then save the data to a database and store the image.
+
+            // Example of what would happen with a backend:
+            /*
+            const formData = new FormData(this); // 'this' refers to the form
+            fetch('/api/products', { // This endpoint would need to be created on your server
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    uploadStatus.style.color = 'green';
+                    uploadStatus.innerText = 'Product listed successfully! Awaiting review.';
+                    this.reset(); // Clear form
+                } else {
+                    uploadStatus.style.color = 'red';
+                    uploadStatus.innerText = 'Listing failed: ' + (data.message || 'Server error.');
+                }
+            })
+            .catch(error => {
+                uploadStatus.style.color = 'red';
+                uploadStatus.innerText = 'Error during listing. Please try again.';
+                console.error('Error:', error);
+            });
+            */
+
+            // Simulate server response for client-side demo
+            setTimeout(() => {
+                uploadStatus.style.color = 'green';
+                uploadStatus.innerText = `"${productName}" listed successfully! (Requires backend to save and display)`;
+                this.reset(); // Clear the form
+            }, 2000);
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+
+        // Initialize cart UI on load
+        document.addEventListener('DOMContentLoaded', updateCartUI);
+
+        // Add event listener for clear cart button
+        document.querySelector('.cart-actions .btn-secondary').addEventListener('click', clearCart);
+    </script>
 </body>
-
 </html>
